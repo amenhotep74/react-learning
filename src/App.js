@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MyComponent from './MyComponent';
 
 class App extends Component {
+  // updates the state then the title is fed back into the input as the value prop
   constructor(props) {
     super(props);
 
@@ -9,33 +10,22 @@ class App extends Component {
       title: 'App title'
     };
     
-    this.onClick = this.onClick.bind(this);
+    this.updateTitle = this.updateTitle.bind(this);
   }
   
-  onClick(event) {
-    this.setState({
-      title: 'New App title'
-    });
+  updateTitle(event) {
+    this.setState({ title: event.target.value });
   }
-
-  onSubmit(event){
-    event.preventDefault();
-    alert(this.input.value);
-  }
-
-  onChange(event){
-    console.log(event.target.value);
-  }
+  
   render() { 
     return ( 
       <div>
         <h1>{this.state.title}</h1>
-        <div onClick={this.onClick}>Click here</div>
-        <MyComponent 
-          title="This is the component title"
-          name="bradley"
-          onClick={this.onClick}
+        <input 
+        onChange={this.updateTitle}
+        value={this.state.title}
         />
+
       </div>
     );
   }
